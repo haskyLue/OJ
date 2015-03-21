@@ -1,42 +1,35 @@
 #include "stdio.h"
-#include "stdlib.h"
-//int main()
-//{
-//	int line;
-//	int i=0;
-//	char *tmp;
-//
-//	scanf("%d",&line);
-//	int numArray[line];
-//
-//	while(i<line)
-//	{
-//		scanf("%d",&numArray[i++]);
-//	}
-//	for(i=0;i<line;i++){
-//		(numArray[i],tmp,2);
-//		printf("%s",tmp);
-//		//printf("%ld\n",numArray[i]);
-//	}
-//	system("pause");
-//	return 0;
-//}
+#define bitmax 64
+void parse(long value)
+{
+    int i;
+	int output[bitmax];
 
-#include <stdio.h>
+	//转化二进制 取尾右移
+    for (i = bitmax-1; i >= 0; --i, value >>= 1)
+		output[i] = (value & 1) ; 
 
+	//清前置零
+	int tag=0; 
+    for (i=0;i<bitmax;i++) 
+	{
+		if(output[i]==1) tag=1;
+		if(tag) printf("%d",output[i]);
+	}
+	printf("\n");
+}
 int main()
 {
-	int ival,n=0;
-	char bin[32];
-	scanf("%d",&ival);
-	while(ival>0){
-		bin[n++]=ival&0x01;
-		ival>>=1;
+	/* freopen("data","r",stdin); */
+	int n;
+	while(scanf("%d",&n)!=EOF && n<=1000)
+	{
+		long s;
+		while(n--)
+		{
+			scanf("%ld",&s);
+			s==0?printf("0\n"):parse(s);
+		}
 	}
-	for(n--;n>=0;n--)
-		printf("%d",bin[n]);
-
-	getch();
 	return 0;
 }
-
